@@ -18,6 +18,7 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .login
-  margin-right 10px
+  margin-right 15px
   cursor pointer
+  font-size 17px
 </style>

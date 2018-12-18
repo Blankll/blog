@@ -4,7 +4,7 @@
       <mu-button icon slot="left">
         <mu-icon value="menu"></mu-icon>
       </mu-button>
-      Title
+      SEVEN
       <profile v-if="isLogin" slot="right"></profile>
       <login-button v-if="!isLogin" slot="right"></login-button>
     </mu-appbar>
@@ -27,21 +27,11 @@ export default {
     LoginButton
   },
   mounted () {
-    if (Token.getToken) {
+    if (Token.getToken()) {
       this.isLogin = true
     }
   },
-  methods: {
-    loginOut () {
-      this.$axios
-        .post('/api/home/loginout')
-        .then(res => {
-          console.log('退出成功')
-          this.isLogin = false
-        })
-        .catch(err => console.log(err))
-    }
-  }
+  methods: {}
 }
 </script>
 <style lang="stylus" scoped>

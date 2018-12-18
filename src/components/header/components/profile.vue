@@ -10,9 +10,9 @@
             <mu-list-item-title>Profile</mu-list-item-title>
           </mu-list-item-content>
         </mu-list-item>
-        <mu-list-item button>
+        <mu-list-item @click="loginOut" button>
           <mu-list-item-content>
-            <mu-list-item-title>Login Out</mu-list-item-title>
+            <mu-list-item-title><div>Login Out</div></mu-list-item-title>
           </mu-list-item-content>
         </mu-list-item>
       </mu-list>
@@ -20,11 +20,29 @@
   </div>
 </template>
 <script>
+import Token from '@/utils/token'
 export default {
   name: 'Profile',
   data () {
     return {
       imageUrl: '/static/logo.jpg'
+    }
+  },
+  methods: {
+    loginOut () {
+      this.$axios
+        .post('/api/home/loginout')
+        .then(res => {
+          console.log('退出成功')
+          this.isLogin = false
+          Token.removeToken()
+          this.$router.push({ path: '/' })
+        })
+        .catch(err => {
+          this.isLogin = false
+          Token.removeToken()
+          this.$router.push({ path: '/' })
+        })
     }
   }
 }

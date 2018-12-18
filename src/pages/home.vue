@@ -1,16 +1,18 @@
 <template>
   <div class="home">
     <home-header></home-header>
+    <home-convas></home-convas>
   </div>
 </template>
 
 <script>
-import Token from '@/utils/token'
 import Header from '@/components/header/header'
+import HomeConvas from '@/components/convas/convas'
 export default {
   name: 'Home',
   components: {
-    HomeHeader: Header
+    HomeHeader: Header,
+    HomeConvas
   },
   data () {
     return {
@@ -18,21 +20,7 @@ export default {
       date: undefined
     }
   },
-  mounted () {
-    if (Token.getToken) {
-      this.isLogin = true
-    }
-  },
   methods: {
-    loginOut () {
-      this.$axios
-        .post('/api/home/loginout')
-        .then(res => {
-          console.log('退出成功')
-          this.isLogin = false
-        })
-        .catch(err => console.log(err))
-    }
   }
 }
 </script>
