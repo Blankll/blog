@@ -1,13 +1,17 @@
 <template>
-  <div>
-    <mu-appbar style="width: 100%;" title="Title"> </mu-appbar>
+  <div class="home">
+    <home-header></home-header>
   </div>
 </template>
 
 <script>
 import Token from '@/utils/token'
+import Header from '@/components/header/header'
 export default {
   name: 'Home',
+  components: {
+    HomeHeader: Header
+  },
   data () {
     return {
       isLogin: false,
@@ -32,8 +36,7 @@ export default {
   }
 }
 </script>
-<style>
-demo-date-picker {
-  margin: 8px;
-}
+<style lang="stylus" scoped>
+.home
+  width 100%
 </style>

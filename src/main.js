@@ -3,7 +3,6 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import './assets/styles/reset.css'
 import './utils/Axios'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
