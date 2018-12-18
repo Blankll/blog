@@ -2,12 +2,13 @@ import Vue from 'vue'
 import axios from 'axios'
 // import { Message } from 'element-ui'
 import router from '../router/index'
+import Token from './token'
 Vue.prototype.$axios = axios
 
 // 全局请求拦截
 axios.interceptors.request.use(config => {
   if (localStorage.getItem('token')) {
-    config.headers.Authorization = localStorage.getItem('token')
+    config.headers.Authorization = 'Bearer ' + localStorage.getItem('token')
   }
   if (config.method === 'post') {
     let formData = new FormData()
@@ -49,6 +50,18 @@ axios.interceptors.response.use(res => {
 error => {
   let status = error.response.status
   if (status === 401) {
+    if (Token.getToken()) {
+      axios
+        .get('/home/loginrefresh')
+        .then(res => {
+          Token.setToken(res.data.data.accss_token)
+        })
+        .catch(err => {
+          console.log(err)
+          alert('登录状态信息过期,请重新登录')
+          router.push('/login')
+        })
+    }
     localStorage.removeItem('token')
     // Message({
     //   showClose: true,
@@ -68,7 +81,7 @@ error => {
     //   type: 'error'
     // })
     alert('已登录，请不要重复操作')
-    router.push('/home')
+    router.push('/')
   } else {
   /*
    * status不在指定内容中时，将服务器端返回信息通过element-ui的错误信息提示进行提示

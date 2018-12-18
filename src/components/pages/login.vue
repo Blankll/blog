@@ -10,6 +10,7 @@
   </div>
 </template>
 <script>
+import Token from '@/utils/token'
 export default {
   name: 'Login',
   data () {
@@ -28,7 +29,8 @@ export default {
       this.$axios
         .post('/api/home/passwordlogin', this.loginForm)
         .then(res => {
-          console.log(res.data)
+          Token.setToken(res.data.access_token)
+          this.$router.push('/')
         })
         .catch(err => console.log(err))
     },
