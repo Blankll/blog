@@ -39,6 +39,7 @@ export default {
           this.$router.push({ path: '/' })
         })
         .catch(err => {
+          console.log(err)
           this.isLogin = false
           Token.removeToken()
           this.$router.push({ path: '/' })

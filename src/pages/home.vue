@@ -2,17 +2,20 @@
   <div class="home">
     <home-header></home-header>
     <home-convas></home-convas>
+    <home-list></home-list>
   </div>
 </template>
 
 <script>
 import Header from '@/components/header/header'
 import HomeConvas from '@/components/convas/convas'
+import HomeList from '@/components/homelist/list'
 export default {
   name: 'Home',
   components: {
     HomeHeader: Header,
-    HomeConvas
+    HomeConvas,
+    HomeList
   },
   data () {
     return {
