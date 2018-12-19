@@ -1,3 +1,6 @@
 .clear-both {
   clear: both;
 }
+body {
+  margin: 0;
+}

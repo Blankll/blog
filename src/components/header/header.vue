@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <mu-appbar color="primary">
+    <mu-appbar color="darkBlack">
       <mu-button icon slot="left">
         <mu-icon value="menu"></mu-icon>
       </mu-button>
