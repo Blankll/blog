@@ -2,7 +2,7 @@
   <mu-container class="card">
     <mu-card v-for="list in lists" :key="list" class="item">
       <div class="card-header">
-        <mu-card-title title="Content Title"></mu-card-title>
+        <mu-card-title title="Content Title" @click="checkOut(list)"></mu-card-title>
       </div>
       <div class="card-body">
         <div class="body-image">
@@ -36,6 +36,12 @@ export default {
       colors: ['primary', 'red', 'warning', 'darkBlack', 'purple'],
       imgURL: '/static/01.jpg'
     }
+  },
+  methods: {
+    checkOut (list) {
+      console.log('checked' + list)
+      this.$router.push({ path: '/article', query: { id: list }})
+    }
   }
 }
 </script>
@@ -51,6 +57,7 @@ export default {
   .item
     margin-top 17px
     .card-header
+      cursor pointer
     .card-body
       .body-image
         float left
