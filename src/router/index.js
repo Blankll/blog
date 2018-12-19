@@ -9,7 +9,14 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: () => import('@/pages/home')
+      component: () => import('@/pages/home'),
+      children: [
+        {
+          path: '',
+          name: 'HomePage',
+          component: () => import('@/pages/home/home')
+        }
+      ]
     },
     {
       path: '/login',

@@ -1,29 +1,21 @@
 <template>
   <div class="home">
     <home-header></home-header>
-    <home-convas></home-convas>
-    <home-list></home-list>
-    <page-footer></page-footer>
+    <div>
+      <router-view/>
+    </div>
   </div>
 </template>
 
 <script>
 import Header from '@/components/header/header'
-import HomeConvas from '@/components/convas/convas'
-import HomeList from '@/components/homelist/list'
-import PageFooter from '@/components/footer/footer'
 export default {
   name: 'Home',
   components: {
-    HomeHeader: Header,
-    HomeConvas,
-    HomeList,
-    PageFooter
+    HomeHeader: Header
   },
   data () {
     return {
-      isLogin: false,
-      date: undefined
     }
   },
   methods: {
