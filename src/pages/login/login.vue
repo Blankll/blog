@@ -11,6 +11,7 @@
 </template>
 <script>
 import Token from '@/utils/token'
+import 'styles/reset.css'
 export default {
   name: 'Login',
   data () {
