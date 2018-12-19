@@ -20,7 +20,7 @@
       </div>
       <div class="card-footer">
         <mu-button :color="colors[list]" v-for="list in lists" :key="list" class="tag">
-          <mu-icon value="device_hub" left></mu-icon>BACK
+          <mu-icon value="device_hub" left></mu-icon>TAG
         </mu-button>
       </div>
     </mu-card>

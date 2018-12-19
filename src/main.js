@@ -7,6 +7,7 @@ import './utils/Axios'
 import './assets/styles/index.css'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
+import 'typeface-roboto'
 
 Vue.config.productionTip = false
 
