@@ -4,7 +4,11 @@
       <mu-button icon slot="left">
         <mu-icon value="menu"></mu-icon>
       </mu-button>
-      SEVEN
+      <div class="menu-item">
+        <div>SEVEN</div>
+        <div>TAGS</div>
+        <div>ME</div>
+      </div>
       <profile v-if="isLogin" slot="right"></profile>
       <login-button v-if="!isLogin" slot="right"></login-button>
     </mu-appbar>
@@ -37,4 +41,11 @@ export default {
 <style lang="stylus" scoped>
 .home
   width 100%
+  position fixed
+  z-index 9999
+  .menu-item
+    display flex
+    div
+      margin-right 20px
+      cursor pointer
 </style>

@@ -4,8 +4,8 @@
     <div class="login-box">
       <input type="text" v-model="loginForm.username" placeholder="email" class="input-one">
       <input type="password" v-model="loginForm.password" placeholder="password" class="input-two">
-      <button type="submit" @click="loginSubmit" class="login-button">登录</button>
-      <button type="submit" @click="authorizationCode" class="login-button">authorizationCode</button>
+      <button type="submit" @click="loginSubmit" class="login-button">LOGIN</button>
+      <button type="submit" @click="authorizationCode" class="login-button">REGISTER</button>
     </div>
   </div>
 </template>
@@ -68,10 +68,11 @@ export default {
     height 300px
     background-color #fff
     opacity 0.9
+    box-shadow 0 0 .7rem 0rem rgba(236, 240, 241,1.0)
     input
       height 40px
       width 90%
-      margin-left 10px
+      margin-left 15px
       padding 2px 10px
       border-radius 0
       box-shadow none
@@ -92,5 +93,4 @@ export default {
       width 100px
     .login-button:hover
       cursor pointer
-
 </style>

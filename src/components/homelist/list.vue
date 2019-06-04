@@ -40,7 +40,7 @@ export default {
   methods: {
     checkOut (list) {
       console.log('checked' + list)
-      this.$router.push({ path: '/article', query: { id: list }})
+      this.$router.push({ path: '/article', query: { id: list } })
     }
   }
 }

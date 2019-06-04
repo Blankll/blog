@@ -24,6 +24,18 @@ export default new Router({
       ]
     },
     {
+      path: '/admin',
+      name: 'Admin',
+      component: () => import('@/pages/admins/home/home'),
+      children: [
+        {
+          path: 'article',
+          name: 'AdminArticle',
+          component: () => import('@/pages/admins/article/article')
+        }
+      ]
+    },
+    {
       path: '/login',
       name: 'Login',
       component: () => import('@/pages/login/login')
