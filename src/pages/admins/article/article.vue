@@ -66,6 +66,11 @@ export default {
     },
     articleEdit (item) {
       this.$router.push({ path: '/admin/article/edit', query: { id: item.id } })
+    },
+    articleDelete (item) {
+      this.$axios.delete('/api/article/' + item.id)
+        .then(res => { item.status = 0 })
+        .catch(err => console.log(err))
     }
   },
   mounted () {

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="root">
     <mu-container class="article">
       <mu-form :model="article" class="mu-demo-form" label-position="left" label-width="100">
         <mu-form-item prop="input" label="标题">
@@ -77,9 +77,9 @@ export default {
       // debug keep close on product ready
       wEditor.customConfig.debug = true
       wEditor.customConfig.customUploadImg = (files, insert) => {
-        this.$axios.post('/api/article/storeimage', { image: files[0] })
+        this.$axios.post('/api/article/storeimage', { imgurl: files[0] })
           // insert to the article and db image url
-          .then(res => insert(this.prefix + res.data.uri))
+          .then(res => insert(this.prefix + res.data.imgurl))
       }
       this.editor = wEditor
       this.editor.create()
@@ -92,6 +92,9 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+.root
+  max-width 100%
+  overflow hidden
 .article
   padding-top 100px
   padding-left 20px
