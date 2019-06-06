@@ -2,7 +2,7 @@
   <div class="login" :style="{ backgroundImage: 'url(' + bgImg + ')' }">
     <p class="title">SEVEN</p>
     <div class="login-box">
-      <input type="text" v-model="loginForm.username" placeholder="email" class="input-one">
+      <input type="text" v-model="loginForm.phone" placeholder="Phone" class="input-one">
       <input type="password" v-model="loginForm.password" placeholder="password" class="input-two">
       <button type="submit" @click="loginSubmit" class="login-button">LOGIN</button>
       <button type="submit" @click="authorizationCode" class="login-button">REGISTER</button>
@@ -17,9 +17,7 @@ export default {
   data () {
     return {
       loginForm: {
-        grant_type: 'password',
-        scope: '',
-        username: '',
+        phone: '',
         password: ''
       },
       bgImg: '/static/login.jpg'
@@ -28,10 +26,16 @@ export default {
   methods: {
     loginSubmit () {
       this.$axios
-        .post('/api/home/passwordlogin', this.loginForm)
+        .post('/api/admin/login', this.loginForm)
         .then(res => {
-          Token.setToken(res.data.access_token)
-          this.$router.push('/')
+          let token = res.data.token
+          let scope = res.data.scope
+          Token.setToken(token, scope)
+          if (scope === 1) {
+            this.$router.push('/admin/article')
+          } else {
+            this.$router.push('/')
+          }
         })
         .catch(err => console.log(err))
     },

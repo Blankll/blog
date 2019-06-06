@@ -32,6 +32,21 @@ export default new Router({
           path: 'article',
           name: 'AdminArticle',
           component: () => import('@/pages/admins/article/article')
+        },
+        {
+          path: 'article/add',
+          name: 'AdminArticleAdd',
+          component: () => import('@/pages/admins/article/add')
+        },
+        {
+          path: 'article/edit',
+          name: 'AdminArticleEdit',
+          component: () => import('@/pages/admins/article/edit')
+        },
+        {
+          path: 'tag',
+          name: 'AdminTag',
+          component: () => import('@/pages/admins/tag/tag')
         }
       ]
     },

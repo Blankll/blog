@@ -21,7 +21,7 @@
         <mu-list-item-action>
           <mu-icon class="toggle-icon" size="24" value="keyboard_arrow_down"></mu-icon>
         </mu-list-item-action>
-        <mu-list-item button :ripple="false" slot="nested">
+        <mu-list-item button :ripple="false" slot="nested" to="/admin/tag">
           <mu-list-item-title>list</mu-list-item-title>
         </mu-list-item>
       </mu-list-item>
@@ -55,5 +55,10 @@
 <script>
 export default {
   name: 'AdminHomeLeft',
+  data () {
+    return {
+      open: ''
+    }
+  }
 }
 </script>

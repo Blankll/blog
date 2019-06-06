@@ -2,6 +2,7 @@
   <div class="root">
     <div class="left">
       <admin-home-left></admin-home-left>
+      <div class="left-holder"></div>
     </div>
     <div class="top">
       <admin-home-top></admin-home-top>
@@ -27,9 +28,11 @@ export default {
   .left
     float left
     width 20%
-    height 100%
+    .left-holder
+      height 500px
   .top
     float left
     width 80%
+  .center
+    float left
 </style>
-

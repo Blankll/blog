@@ -1,4 +1,4 @@
+let host = '127.0.0.1'
 export const config = {
-  urlPrefix: 'http://apitrans.geekfun.club/statics/images',
-  wordVoice: 'http://apitrans.geekfun.club/statics/audios'
+  prefix: 'http://' + host
 }
