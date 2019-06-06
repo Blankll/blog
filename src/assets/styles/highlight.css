@@ -1,0 +1,13 @@
+.hljs {
+  display: block;
+  overflow-x: auto;
+  color: #abb2bf;
+  background: #282c34;
+  border-radius: 10px
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}

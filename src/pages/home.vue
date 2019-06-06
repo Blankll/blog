@@ -1,23 +1,21 @@
 <template>
   <div class="home">
     <home-header></home-header>
-    <home-convas></home-convas>
+    <div>
+      <router-view/>
+    </div>
   </div>
 </template>
 
 <script>
 import Header from '@/components/header/header'
-import HomeConvas from '@/components/convas/convas'
 export default {
   name: 'Home',
   components: {
-    HomeHeader: Header,
-    HomeConvas
+    HomeHeader: Header
   },
   data () {
     return {
-      isLogin: false,
-      date: undefined
     }
   },
   methods: {
