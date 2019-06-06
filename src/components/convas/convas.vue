@@ -10,7 +10,7 @@ export default {
   name: 'HomeConvas',
   data () {
     return {
-      imgURL: '/static/logo.jpg'
+      imgURL: '/static/one.jpg'
     }
   }
 }
@@ -18,7 +18,10 @@ export default {
 <style lang="stylus" scoped>
 .convas
   width 100%
-  height 200px
+  height 400px
+  @media (max-width 1000px) {
+    height 230px
+  }
   .img-box
     width 100%
     height 100%

@@ -20,6 +20,11 @@ export default new Router({
           path: 'article',
           name: 'Article',
           component: () => import('@/pages/article/article')
+        },
+        {
+          path: 'me',
+          name: 'AboutMe',
+          component: () => import('@/pages/me/me')
         }
       ]
     },

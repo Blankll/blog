@@ -8,10 +8,12 @@ import './assets/styles/index.css'
 import MuseUI from 'muse-ui'
 import 'muse-ui/dist/muse-ui.css'
 import 'typeface-roboto'
-
+import Highlight from './utils/codelight'
+import './assets/styles/highlight.css'
 Vue.config.productionTip = false
 
 Vue.use(MuseUI)
+Vue.use(Highlight)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
