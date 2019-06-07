@@ -18,8 +18,8 @@
       </div>
       <div class="card-footer">
         <mu-button
-          :color="colors[article.tag.length % colors.length]"
-          v-for="tag in article.tag" :key="tag.id" class="tag">
+          v-for="tag in article.tag" :key="tag.id" class="tag"
+          :color="colors[tag.id % colors.length]">
           <mu-icon value="device_hub" left></mu-icon>{{tag.name}}
         </mu-button>
       </div>

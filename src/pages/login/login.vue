@@ -11,7 +11,6 @@
 </template>
 <script>
 import Token from '@/utils/token'
-import 'styles/reset.css'
 export default {
   name: 'Login',
   data () {
@@ -51,6 +50,7 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .login
+  position fixed
   width 100%
   height 100%
   // 背景图片居中无拉伸
