@@ -54,7 +54,7 @@ export default {
   background:rgba(255,255,255,0.9)
   position relative
   padding 10px
-  box-shadow 0 0 .4rem .2rem rgba(236, 240, 241, 1.0)
+  box-shadow 0 0 .1rem .1rem rgba(236, 240, 241, 1.0)
   .title
     text-align center
     font-size 30px

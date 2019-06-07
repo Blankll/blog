@@ -32,6 +32,7 @@ export default new Router({
       path: '/admin',
       name: 'Admin',
       component: () => import('@/pages/admins/home/home'),
+      redirect: '/admin/article',
       children: [
         {
           path: 'article',

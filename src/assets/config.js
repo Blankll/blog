@@ -1,4 +1,4 @@
-let host = '127.0.0.1'
+let host = 'apiblog.geekfun.club'
 export const config = {
   prefix: 'http://' + host
 }
