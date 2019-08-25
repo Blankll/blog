@@ -17,11 +17,17 @@
         <div class="clear-both"></div>
       </div>
       <div class="card-footer">
-        <mu-button
-          v-for="tag in article.tag" :key="tag.id" class="tag"
-          :color="colors[tag.id % colors.length]">
-          <mu-icon value="device_hub" left></mu-icon>{{tag.name}}
-        </mu-button>
+        <div>
+          <mu-button
+            v-for="tag in article.tag" :key="tag.id" class="tag"
+            :color="colors[tag.id % colors.length]">
+            <mu-icon value="device_hub" left></mu-icon>{{tag.name}}
+          </mu-button>
+        </div>
+        <div class="time">
+          <p>CREATED: <span>{{article.created_at}}</span></p>
+          <p>UPDATED: <span>{{article.updated_at}}</span></p>
+        </div>
       </div>
     </mu-card>
   </mu-container>
@@ -82,6 +88,10 @@ export default {
         // text-overflow ellipsis
         cursor pointer
     .card-footer
+      display flex
+      justify-content space-between
       .tag
         margin 10px
+      .time
+        margin-right 20px
 </style>

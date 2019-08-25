@@ -4,11 +4,13 @@
       <admin-home-left></admin-home-left>
       <div class="left-holder"></div>
     </div>
-    <div class="top">
-      <admin-home-top></admin-home-top>
-    </div>
-    <div class="center">
-      <router-view/>
+    <div class="body">
+      <div class="top">
+        <admin-home-top></admin-home-top>
+      </div>
+      <div class="center">
+        <router-view/>
+      </div>
     </div>
   </div>
 </template>
@@ -25,14 +27,15 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .root
+  display flex
   .left
-    float left
     width 20%
     .left-holder
       height 500px
-  .top
-    float left
-    width 80%
-  .center
-    float left
+  .body
+    width 100%
+    .top
+      width 100%
+    .center
+      width 100%;
 </style>

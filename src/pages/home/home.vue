@@ -7,7 +7,7 @@
 </template>
 <script>
 import HomeConvas from '@/components/convas/convas'
-import HomeList from '@/components/homelist/list'
+import HomeList from './components/list'
 import PageFooter from '@/components/footer/footer'
 export default {
   name: 'HomePage',
