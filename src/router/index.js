@@ -25,6 +25,11 @@ export default new Router({
           path: 'me',
           name: 'AboutMe',
           component: () => import('@/pages/me/me')
+        },
+        {
+          path: 'tags',
+          name: 'Tags',
+          component: () => import('@/pages/tags/tags')
         }
       ]
     },

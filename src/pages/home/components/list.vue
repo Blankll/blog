@@ -7,7 +7,7 @@
       <div class="card-body">
         <div class="body-image">
           <!-- <mu-card-media title="Image Title"> -->
-          <mu-card-media title="I">
+          <mu-card-media :title="article.created_at">
             <img :src="prefix + article.imgurl" class="image">
           </mu-card-media>
         </div>
@@ -24,14 +24,13 @@
             <mu-icon value="device_hub" left></mu-icon>{{tag.name}}
           </mu-button>
         </div>
-        <div class="time">
+        <!-- <div class="time">
           <p>CREATED: <span>{{article.created_at}}</span></p>
           <p>UPDATED: <span>{{article.updated_at}}</span></p>
-        </div>
+        </div> -->
       </div>
     </mu-card>
   </mu-container>
-
 </template>
 <script>
 import { config } from '@/assets/config'
@@ -88,10 +87,6 @@ export default {
         // text-overflow ellipsis
         cursor pointer
     .card-footer
-      display flex
-      justify-content space-between
       .tag
         margin 10px
-      .time
-        margin-right 20px
 </style>

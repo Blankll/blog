@@ -7,6 +7,8 @@
 ``` bash
 # install dependencies
 npm install
+# recommander to use cnpm
+cnpm install
 
 # serve with hot reload at localhost:8080
 npm run dev
