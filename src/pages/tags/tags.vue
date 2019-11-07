@@ -7,7 +7,7 @@
           v-for="tag in tags"
           :key="tag.id"
           :color="colors[tag.id % colors.length]"
-          :selected="tag.selected" @click="selectedChage(tag)">
+          :selected="selectedIds.includes(tag.id)" @click="selectedChange(tag)">
           {{tag.name}}
         </mu-chip>
       </mu-container>
@@ -70,12 +70,21 @@ export default {
     getArticlesByTag () {
       let ids = ''
       this.selectedIds.forEach(el => { ids = ids !== '0' && ids ? `${ids},${el}` : `${el}` })
-      this.$axios.get(`/api/tag/article/${ids}`)
+      console.log(ids)
+      this.$axios.get('/api/tag/article/' + ids)
         .then(res => {
-          console.log('res', res)
           this.list = res.data
         })
         .catch(err => console.log(err))
+    },
+    selectedChange (tag) {
+      console.log(tag)
+      if (this.selectedIds.includes(tag.id)) {
+        this.selectedIds.splice(this.selectedIds.findIndex(el => el === tag.id), 1)
+      } else {
+        this.selectedIds.push(tag.id)
+      }
+      this.getArticlesByTag()
     }
   },
   mounted () {

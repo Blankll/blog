@@ -10,6 +10,21 @@
        <span v-html="article.content" v-highlight></span>
       </div>
     </div>
+    <div class="comment-box">
+      <div class="comment-div">
+        <textarea class="comment-text-area"></textarea>
+        <div class="comment-button-group">
+          <mu-button>
+            delete
+            <mu-icon right value="delete"></mu-icon>
+          </mu-button>
+          <mu-button color="red">
+            Send
+            <mu-icon right value="send"></mu-icon>
+          </mu-button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -54,10 +69,32 @@ export default {
   background:rgba(255,255,255,0.9)
   position relative
   padding 10px
-  box-shadow 0 0 .1rem .1rem rgba(236, 240, 241, 1.0)
+  box-shadow 0 0 .01rem .1rem rgba(236, 240, 241, 1.0)
   .title
     text-align center
     font-size 30px
   .content
     font-size 20px
+.comment-box
+  z-index 2
+  margin 50px 20%
+  @media screen and (max-width: 1000px)
+    margin 50px 1px
+  background-color #ffffff
+  background:rgba(255,255,255,0.9)
+  position relative
+  padding 10px
+  box-shadow 0 0 .01rem .01rem rgba(236, 240, 241, 1.0)
+  .comment-div
+    width 90%
+    height 200px
+    margin 0 auto
+    .comment-text-area
+      width 100%
+      height 100%
+      border-radius 10px
+      padding 10px
+    .comment-button-group
+      display flex
+      justify-content flex-end
 </style>
