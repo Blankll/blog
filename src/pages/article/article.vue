@@ -14,15 +14,18 @@
       <div class="comment-div">
         <textarea class="comment-text-area"></textarea>
         <div class="comment-button-group">
-          <mu-button>
-            delete
+          <mu-button color="red" class="comment-button-item">
+            CANCEL
             <mu-icon right value="delete"></mu-icon>
           </mu-button>
-          <mu-button color="red">
-            Send
+          <mu-button color="blue">
+            PUBLISH
             <mu-icon right value="send"></mu-icon>
           </mu-button>
         </div>
+      </div>
+      <div class="comments-list">
+        <p>ALL COMMENTS</p>
       </div>
     </div>
   </div>
@@ -95,6 +98,15 @@ export default {
       border-radius 10px
       padding 10px
     .comment-button-group
+      margin-top 10px
       display flex
       justify-content flex-end
+      .comment-button-item
+        margin-right 10px
+  .comments-list
+    width 90%;
+    margin 0 auto
+    margin-top 60px
+    > p
+      font-size 20px
 </style>

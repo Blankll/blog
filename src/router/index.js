@@ -58,6 +58,11 @@ export default new Router({
           path: 'tag',
           name: 'AdminTag',
           component: () => import('@/pages/admins/tag/tag')
+        },
+        {
+          path: 'user',
+          name: 'AdminUser',
+          component: () => import('@/pages/admins/user/user')
         }
       ]
     },
