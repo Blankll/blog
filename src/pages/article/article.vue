@@ -14,11 +14,11 @@
       <div class="comment-div">
         <textarea class="comment-text-area"></textarea>
         <div class="comment-button-group">
-          <mu-button color="red" class="comment-button-item">
+          <mu-button @click="comentOpsClick('cancel')" color="red" class="comment-button-item">
             CANCEL
             <mu-icon right value="delete"></mu-icon>
           </mu-button>
-          <mu-button color="blue">
+          <mu-button @click="comentOpsClick('confirm')" color="blue">
             PUBLISH
             <mu-icon right value="send"></mu-icon>
           </mu-button>
@@ -28,23 +28,44 @@
         <p>ALL COMMENTS</p>
       </div>
     </div>
+    <login-dialog
+    v-if="loginProps.isShown"
+    :login-props= "loginProps"
+    @loginEmit="getLoginEmit"></login-dialog>
   </div>
 </template>
 <script>
 import { config } from '@/assets/config'
+import LoginDialog from '@/components/logindialog/loginDialog'
 export default {
   name: 'Article',
+  components: {
+    LoginDialog
+  },
   data () {
     return {
       prefix: config.prefix,
       id: this.$route.query.id,
-      article: {}
+      article: {},
+      comment: '',
+      loginProps: { isShown: false }
     }
   },
   methods: {
     getArticle () {
       this.$axios.get('/api/article/' + this.id)
         .then(res => { this.article = res.data })
+    },
+    comentOpsClick (status) {
+      if (status === 'cancel') { return (this.comment = '') }
+      if (!localStorage.getItem('token')) {
+        this.loginProps.isShown = true
+      }
+      console.log('after dialog')
+    },
+    getLoginEmit (recv) {
+      console.log('emit recv:', recv)
+      this.loginProps.isShown = false
     }
   },
   mounted () {

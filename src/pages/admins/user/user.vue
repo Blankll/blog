@@ -1,23 +1,21 @@
 <template>
   <div class="root">
-    <mu-container>
-      <mu-paper :z-depth="3">
-        <mu-data-table :loading="isLoading" :columns="columns" :sort.sync="sort" @sort-change="handleSortChange" :data="users">
-          <template slot-scope="scope">
-            <td>{{scope.row.id}}</td>
-            <td>{{scope.row.username}}</td>
-            <td>{{scope.row.phone}}</td>
-            <td>{{scope.row.email}}</td>
-            <td>{{scope.row.created_at}}</td>
-            <td>{{scope.row.updated_at}}</td>
-            <td> </td>
-          </template>
-        </mu-data-table>
-        <mu-flex justify-content="end" style="margin: 32px 0;">
-          <mu-pagination raised :total="page_info.total" :current.sync="page_info.current" :page-size="page_info.per_page"></mu-pagination>
-        </mu-flex>
-      </mu-paper>
-    </mu-container>
+    <mu-paper :z-depth="3" class="table-box">
+      <mu-data-table :loading="isLoading" :columns="columns" :sort.sync="sort" @sort-change="handleSortChange" :data="users">
+        <template slot-scope="scope">
+          <td>{{scope.row.id}}</td>
+          <td>{{scope.row.username}}</td>
+          <td>{{scope.row.phone}}</td>
+          <td>{{scope.row.email}}</td>
+          <td>{{scope.row.created_at}}</td>
+          <td>{{scope.row.updated_at}}</td>
+          <td> </td>
+        </template>
+      </mu-data-table>
+      <mu-flex justify-content="end" style="margin: 32px 0;">
+        <mu-pagination raised :total="page_info.total" :current.sync="page_info.current" :page-size="page_info.per_page"></mu-pagination>
+      </mu-flex>
+    </mu-paper>
   </div>
 </template>
 <script>
@@ -72,6 +70,7 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .root
-  position relative
   margin 12px auto
+  .table-box
+    margin 0 atuo
 </style>
