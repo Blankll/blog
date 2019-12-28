@@ -6,52 +6,29 @@
         <mu-chip class="chip-item"
           v-for="tag in tags"
           :key="tag.id"
-          :color="colors[tag.id % colors.length]"
+          :color="selectedIds.includes(tag.id) ? colors[tag.id % colors.length] : false"
           :selected="selectedIds.includes(tag.id)" @click="selectedChange(tag)">
           {{tag.name}}
         </mu-chip>
       </mu-container>
     </div>
     <div class="article-list-box">
-      <div v-for="item in list" :key="item.id">
-        <p>{{item.name}}</p>
-        <mu-container class="card">
-          <mu-card v-for="article in item.article" :key="article.id" class="item">
-            <div class="card-header">
-              <mu-card-title :title="article.title" @click="checkOut(article)"></mu-card-title>
-            </div>
-            <div class="card-body">
-              <div class="body-image">
-                <!-- <mu-card-media title="Image Title"> -->
-                <mu-card-media :title="article.created_at">
-                  <img :src="prefix + article.imgurl" class="image">
-                </mu-card-media>
-              </div>
-              <div class="body-content" @click="checkOut(article)">
-                <span v-html="article.content"></span>
-              </div>
-              <div class="clear-both"></div>
-            </div>
-            <div class="card-footer">
-              <!-- <div class="time">
-                <p>CREATED: <span>{{article.created_at}}</span></p>
-                <p>UPDATED: <span>{{article.updated_at}}</span></p>
-              </div> -->
-            </div>
-          </mu-card>
-        </mu-container>
-      </div>
+      <home-list :articles="articles"></home-list>
     </div>
   </div>
 </template>
 <script>
+import HomeList from '../home/components/list'
 export default {
   name: 'Tags',
+  components: {
+    HomeList
+  },
   data () {
     return {
       colors: ['primary', 'secondary', 'success', 'warning', 'info', 'error'],
       tags: [],
-      list: [],
+      articles: [],
       selectedIds: []
     }
   },
@@ -72,9 +49,7 @@ export default {
       this.selectedIds.forEach(el => { ids = ids !== '0' && ids ? `${ids},${el}` : `${el}` })
       console.log(ids)
       this.$axios.get('/api/tag/article/' + ids)
-        .then(res => {
-          this.list = res.data
-        })
+        .then(res => { this.articles = res.data })
         .catch(err => console.log(err))
     },
     selectedChange (tag) {
@@ -88,7 +63,6 @@ export default {
     }
   },
   mounted () {
-    console.log('tags mounted')
     this.getTags()
   }
 }

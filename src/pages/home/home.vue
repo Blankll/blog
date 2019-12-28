@@ -1,7 +1,7 @@
 <template>
   <div>
     <home-convas></home-convas>
-    <home-list></home-list>
+    <home-list :articles="articles"></home-list>
     <page-footer></page-footer>
   </div>
 </template>
@@ -15,6 +15,20 @@ export default {
     HomeConvas,
     HomeList,
     PageFooter
+  },
+  data () {
+    return {
+      articles: []
+    }
+  },
+  methods: {
+    getArticles () {
+      this.$axios.get('/api/article/published')
+        .then(res => { this.articles = res.data })
+    }
+  },
+  mounted () {
+    this.getArticles()
   }
 }
 </script>

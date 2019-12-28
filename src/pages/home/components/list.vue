@@ -39,25 +39,19 @@ import TagList from './tagList'
 export default {
   name: 'HomeList',
   components: { TagList },
+  props: ['articles'],
   data () {
     return {
       prefix: config.prefix,
-      articles: {},
       colors: ['primary', 'red', 'warning', 'darkBlack', 'purple']
     }
   },
   methods: {
     checkOut (item) {
       this.$router.push({ path: '/article', query: { id: item.id } })
-    },
-    getArticles () {
-      this.$axios.get('/api/article/published')
-        .then(res => { this.articles = res.data })
     }
   },
-  mounted () {
-    this.getArticles()
-  }
+  mounted () { }
 }
 </script>
 <style lang="stylus" scoped>
