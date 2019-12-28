@@ -1,5 +1,6 @@
 <template>
   <div>
+    <mu-alert color="error" v-if="errorText">{{ errorText }}</mu-alert>
     <div class="image">
       <img :src="prefix + article.imgurl" alt="" srcset="" class="article-image" />
     </div>
@@ -12,7 +13,7 @@
     </div>
     <div class="comment-box">
       <div class="comment-div">
-        <textarea class="comment-text-area"></textarea>
+        <textarea class="comment-text-area" @focus="comentOpsClick('focus')" v-model="content"></textarea>
         <div class="comment-button-group">
           <mu-button @click="comentOpsClick('cancel')" color="red" class="comment-button-item">
             CANCEL
@@ -26,6 +27,39 @@
       </div>
       <div class="comments-list">
         <p>ALL COMMENTS</p>
+        <div v-for="item in comments.data" :key="item.id">
+          <hr />
+          <div class="comment-item">
+            <div class="comment-item-head">
+              <div class="head-left">
+                <img :src="prefix + item.user.avatar_url" class="comment-avater">
+                <p class="user-name">&nbsp;&nbsp;&nbsp;&nbsp;{{ item.user.username }}</p>
+              </div>
+              <div class="head-right">
+                <p class="user-date">{{ item.created_at }}</p>
+                <mu-button flat @click="sendSMS">回复</mu-button>
+              </div>
+            </div>
+            <div>
+              <p class="comment-content">{{item.content}}</p>
+            </div>
+            <div class="replies">
+              <div class="reply" v-for="reply in item.replies" :key="reply.id">
+                <div class="reply-head">
+                  <div>
+                    <span class="user-name">{{reply.user.username}}</span>回复
+                    <span class="user-name">{{reply.userd.username}}</span>:
+                  </div>
+                  <div>
+                    <p class="user-date">{{reply.created_at}}</p>
+                    <mu-button flat @click="sendSMS">回复</mu-button>
+                  </div>
+                </div>
+                <p class="comment-content">{{reply.content}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <login-dialog
@@ -47,7 +81,9 @@ export default {
       prefix: config.prefix,
       id: this.$route.query.id,
       article: {},
-      comment: '',
+      content: '',
+      comments: {},
+      errorText: '',
       loginProps: { isShown: false }
     }
   },
@@ -56,12 +92,25 @@ export default {
       this.$axios.get('/api/article/' + this.id)
         .then(res => { this.article = res.data })
     },
+    getComments () {
+      this.$axios.get('/api/article/' + this.id + '/comment')
+        .then(res => { this.comments = res.data })
+    },
     comentOpsClick (status) {
       if (status === 'cancel') { return (this.comment = '') }
-      if (!localStorage.getItem('token')) {
+      if (status === 'focus' && !localStorage.getItem('token')) {
         this.loginProps.isShown = true
       }
-      console.log('after dialog')
+      if (status === 'confirm' && localStorage.getItem('token')) {
+        if (!this.content) { return }
+        this.loginProps.isShown = false
+        this.$axios.post('/api/article/' + this.id + '/comment', {
+          content: this.content,
+          article_id: this.id
+        })
+          .then(res => { this.getComments() })
+          .catch(err => { this.errorText = err.messages[0] })
+      }
     },
     getLoginEmit (recv) {
       console.log('emit recv:', recv)
@@ -70,10 +119,22 @@ export default {
   },
   mounted () {
     this.getArticle()
+    this.getComments()
   }
 }
 </script>
 <style lang="stylus" scoped>
+.user-name
+  color green
+  margin 0px
+  line-height 30px
+.user-date
+  margin 0px
+  line-height 30px
+.comment-content
+  font-size 16px
+  margin-top 0px
+  text-indent 2em
 .placeholder
   height 150px
 .image
@@ -130,4 +191,27 @@ export default {
     margin-top 60px
     > p
       font-size 20px
+    .comment-item
+      .comment-item-head
+        display flex
+        justify-content space-between
+        .head-left
+          display flex
+        .head-right
+          display flex
+        .comment-avater
+          width 30px
+          height 30px
+          overflow hidden
+          object-fit cover
+          border-radius 50%
+      .replies
+        margin-left 20px
+        .reply
+          .reply-head
+            display flex
+            justify-content space-between
+            div:nth-child(2)
+              display flex
+              margin-right 20px
 </style>
