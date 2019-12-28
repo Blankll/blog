@@ -7,8 +7,17 @@
     <mu-alert color="error" v-if="errorText">{{ errorText }}</mu-alert>
     <div class="article-content">
       <p class="title">{{article.title}}</p>
+      <div>
+        <p class="create-date">{{article.created_at}}</p>
+        <tag-list :tags="article.tag"></tag-list>
+      </div>
       <div class="content">
        <span v-html="article.content" v-highlight></span>
+      </div>
+      <div class="article-status-group">
+        <mu-button color="purple" @click="zan">
+          <mu-icon value="thumb_up" left></mu-icon>{{article.zan}}
+        </mu-button>
       </div>
     </div>
     <div class="comment-box">
@@ -80,11 +89,13 @@
 import { config } from '@/assets/config'
 import LoginDialog from '@/components/logindialog/loginDialog'
 import Reply from './components/reply'
+import TagList from '../home/components/tagList'
 export default {
   name: 'Article',
   components: {
     LoginDialog,
-    Reply
+    Reply,
+    TagList
   },
   data () {
     return {
@@ -166,6 +177,21 @@ export default {
       this.replyItem.commentId = -1
       this.replyItem.item = null
       if (status.status === 'confirm') { this.getComments() }
+    },
+    zan () {
+      if (!localStorage.getItem('token')) {
+        this.loginProps.isShown = true
+        return
+      }
+      this.$axios.post('/api/zan', {
+        type: 1,
+        typed_id: this.id
+      })
+        .then(res => {
+          if (res.data.status === 0) { this.article.zan -= 1 }
+          if (res.data.status === 1) { this.article.zan += 1 }
+        })
+        .catch(err => { console.log(err) })
     }
   },
   mounted () {
@@ -211,6 +237,13 @@ export default {
     font-size 30px
   .content
     font-size 20px
+  .article-status-group
+    width 90%
+    margin 0px auto
+    display flex
+    justify-content space-around
+  .create-date
+    text-align center
 .comment-box
   z-index 2
   margin 50px 20%

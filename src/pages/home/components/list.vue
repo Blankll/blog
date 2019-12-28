@@ -17,13 +17,14 @@
         <div class="clear-both"></div>
       </div>
       <div class="card-footer">
-        <div>
+        <!-- <div>
           <mu-button
             v-for="tag in article.tag" :key="tag.id" class="tag"
             :color="colors[tag.id % colors.length]">
             <mu-icon value="device_hub" left></mu-icon>{{tag.name}}
           </mu-button>
-        </div>
+        </div> -->
+        <tag-list :tags="article.tag"></tag-list>
         <!-- <div class="time">
           <p>CREATED: <span>{{article.created_at}}</span></p>
           <p>UPDATED: <span>{{article.updated_at}}</span></p>
@@ -34,8 +35,10 @@
 </template>
 <script>
 import { config } from '@/assets/config'
+import TagList from './tagList'
 export default {
   name: 'HomeList',
+  components: { TagList },
   data () {
     return {
       prefix: config.prefix,
