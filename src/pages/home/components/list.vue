@@ -7,7 +7,7 @@
       <div class="card-body">
         <div class="body-image">
           <!-- <mu-card-media title="Image Title"> -->
-          <mu-card-media title="I">
+          <mu-card-media :title="article.created_at">
             <img :src="prefix + article.imgurl" class="image">
           </mu-card-media>
         </div>
@@ -17,39 +17,41 @@
         <div class="clear-both"></div>
       </div>
       <div class="card-footer">
-        <mu-button
-          v-for="tag in article.tag" :key="tag.id" class="tag"
-          :color="colors[tag.id % colors.length]">
-          <mu-icon value="device_hub" left></mu-icon>{{tag.name}}
-        </mu-button>
+        <!-- <div>
+          <mu-button
+            v-for="tag in article.tag" :key="tag.id" class="tag"
+            :color="colors[tag.id % colors.length]">
+            <mu-icon value="device_hub" left></mu-icon>{{tag.name}}
+          </mu-button>
+        </div> -->
+        <tag-list :tags="article.tag"></tag-list>
+        <!-- <div class="time">
+          <p>CREATED: <span>{{article.created_at}}</span></p>
+          <p>UPDATED: <span>{{article.updated_at}}</span></p>
+        </div> -->
       </div>
     </mu-card>
   </mu-container>
-
 </template>
 <script>
 import { config } from '@/assets/config'
+import TagList from './tagList'
 export default {
   name: 'HomeList',
+  components: { TagList },
+  props: ['articles'],
   data () {
     return {
       prefix: config.prefix,
-      articles: {},
       colors: ['primary', 'red', 'warning', 'darkBlack', 'purple']
     }
   },
   methods: {
     checkOut (item) {
       this.$router.push({ path: '/article', query: { id: item.id } })
-    },
-    getArticles () {
-      this.$axios.get('/api/article/published')
-        .then(res => { this.articles = res.data })
     }
   },
-  mounted () {
-    this.getArticles()
-  }
+  mounted () { }
 }
 </script>
 <style lang="stylus" scoped>

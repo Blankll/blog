@@ -1,9 +1,10 @@
 <template>
   <div class="root">
-    <mu-container class="button-wrapper button-list">
-      <mu-button color="primary" @click="tagAdd">添加</mu-button>
+    <mu-container class="button-add">
+      <mu-button color="primary" @click="tagAdd()">添加</mu-button>
     </mu-container>
-      <mu-paper :z-depth="1">
+    <mu-container class="list-box">
+      <mu-paper z-depth="1">
         <mu-data-table :columns="columns" :data="tags">
           <template slot-scope="scope">
             <td>{{scope.row.id}}</td>
@@ -19,44 +20,45 @@
           </template>
         </mu-data-table>
       </mu-paper>
-      <!-- 添加tag -->
-      <mu-dialog width="360" transition="slide-bottom" fullscreen :open.sync="openEdit">
-        <mu-appbar color="primary" title="Fullscreen Diaolog">
-          <mu-button slot="left" icon @click="openAdd = false">
-            <mu-icon value="close"></mu-icon>
-          </mu-button>
-          <mu-button slot="right" flat  @click="openAdd = false">
-            Done
-          </mu-button>
-        </mu-appbar>
-        <div style="padding: 24px;">
-          <mu-form :model="tag" class="mu-demo-form" label-position="left" label-width="100">
-            <mu-form-item prop="input" label="名称">
-              <mu-text-field v-model="tag.name"></mu-text-field>
-            </mu-form-item>
-          </mu-form>
-          <mu-button color="primary" @click="submitTag">提交</mu-button>
-        </div>
-      </mu-dialog>
-      <!-- 修改tag -->
-      <mu-dialog width="360" transition="slide-bottom" fullscreen :open.sync="openEdit">
-        <mu-appbar color="primary" title="Fullscreen Diaolog">
-          <mu-button slot="left" icon @click="openEdit = false">
-            <mu-icon value="close"></mu-icon>
-          </mu-button>
-          <mu-button slot="right" flat  @click="openEdit = false">
-            Done
-          </mu-button>
-        </mu-appbar>
-        <div style="padding: 24px;">
-          <mu-form :model="tag" class="mu-demo-form" label-position="left" label-width="100">
-            <mu-form-item prop="input" label="名称">
-              <mu-text-field v-model="tag.name"></mu-text-field>
-            </mu-form-item>
-          </mu-form>
-          <mu-button color="warning" @click="submitEdit">提交修改</mu-button>
-        </div>
-      </mu-dialog>
+    </mu-container>
+    <!-- 添加tag -->
+    <mu-dialog width="360" transition="slide-bottom" fullscreen :open.sync="openAdd">
+      <mu-appbar color="primary" title="Fullscreen Diaolog">
+        <mu-button slot="left" icon @click="openAdd = false">
+          <mu-icon value="close"></mu-icon>
+        </mu-button>
+        <mu-button slot="right" flat  @click="openAdd = false">
+          Done
+        </mu-button>
+      </mu-appbar>
+      <div style="padding: 24px;">
+        <mu-form :model="tag" class="mu-demo-form" label-position="left" label-width="100">
+          <mu-form-item prop="input" label="名称">
+            <mu-text-field v-model="tag.name"></mu-text-field>
+          </mu-form-item>
+        </mu-form>
+        <mu-button color="primary" @click="submitTag">提交</mu-button>
+      </div>
+    </mu-dialog>
+    <!-- 修改tag -->
+    <mu-dialog width="360" transition="slide-bottom" fullscreen :open.sync="openEdit">
+      <mu-appbar color="primary" title="Fullscreen Diaolog">
+        <mu-button slot="left" icon @click="openEdit = false">
+          <mu-icon value="close"></mu-icon>
+        </mu-button>
+        <mu-button slot="right" flat  @click="openEdit = false">
+          Done
+        </mu-button>
+      </mu-appbar>
+      <div style="padding: 24px;">
+        <mu-form :model="tag" class="mu-demo-form" label-position="left" label-width="100">
+          <mu-form-item prop="input" label="名称">
+            <mu-text-field v-model="tag.name"></mu-text-field>
+          </mu-form-item>
+        </mu-form>
+        <mu-button color="warning" @click="submitEdit">提交修改</mu-button>
+      </div>
+    </mu-dialog>
   </div>
 </template>
 <script>
@@ -86,6 +88,7 @@ export default {
   },
   methods: {
     tagAdd () {
+      console.log('clicked')
       this.openAdd = true
     },
     getTags () {
@@ -132,6 +135,14 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .root
-  .button-list
+  .button-add
+    position relative
+    top 50px
+    left 10px
+    right 0px
+    height 50px
+  .list-box
     padding 30px
+    clear both
+    position relative
 </style>

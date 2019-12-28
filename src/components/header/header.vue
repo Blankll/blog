@@ -2,12 +2,12 @@
   <div class="home">
     <mu-appbar color="darkBlack">
       <mu-button icon slot="left">
-        <mu-icon value="menu" @click="goHome()"></mu-icon>
+        <mu-icon value="menu" @click="go()"></mu-icon>
       </mu-button>
       <div class="menu-item">
-        <div @click="goHome()">SEVEN</div>
-        <div>TAGS</div>
-        <div @click="goMe()">ME</div>
+        <div @click="go()">SEVEN</div>
+        <div @click="go('tags')">TAGS</div>
+        <div @click="go('me')">ME</div>
       </div>
       <profile v-if="isLogin" slot="right"></profile>
       <login-button v-if="!isLogin" slot="right"></login-button>
@@ -31,11 +31,8 @@ export default {
     LoginButton
   },
   methods: {
-    goHome () {
-      this.$router.push({ path: '/' })
-    },
-    goMe () {
-      this.$router.push({ path: '/me' })
+    go (url = '') {
+      this.$router.push({ path: '/' + url })
     }
   },
   mounted () {
