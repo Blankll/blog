@@ -1,10 +1,10 @@
 <template>
   <div>
-    <mu-alert color="error" v-if="errorText">{{ errorText }}</mu-alert>
     <div class="image">
       <img :src="prefix + article.imgurl" alt="" srcset="" class="article-image" />
     </div>
     <div class="placeholder"></div>
+    <mu-alert color="error" v-if="errorText">{{ errorText }}</mu-alert>
     <div class="article-content">
       <p class="title">{{article.title}}</p>
       <div class="content">
@@ -37,11 +37,15 @@
               </div>
               <div class="head-right">
                 <p class="user-date">{{ item.created_at }}</p>
-                <mu-button flat @click="sendSMS">回复</mu-button>
+                <mu-button flat @click="replyContent(item)">回复</mu-button>
               </div>
             </div>
             <div>
               <p class="comment-content">{{item.content}}</p>
+              <reply
+              v-if="replyItem.commentId==-1 && replyItem.shown===item.id"
+              :replyItem="replyItem"
+              @replyStatusChange="replyStatusChange"></reply>
             </div>
             <div class="replies">
               <div class="reply" v-for="reply in item.replies" :key="reply.id">
@@ -52,10 +56,14 @@
                   </div>
                   <div>
                     <p class="user-date">{{reply.created_at}}</p>
-                    <mu-button flat @click="sendSMS">回复</mu-button>
+                    <mu-button flat @click="replyContent(reply)">回复</mu-button>
                   </div>
                 </div>
                 <p class="comment-content">{{reply.content}}</p>
+                <reply
+                v-if="replyItem.commentId==item.id && replyItem.shown===reply.id"
+                :replyItem="replyItem"
+                @replyStatusChange="replyStatusChange"></reply>
               </div>
             </div>
           </div>
@@ -71,10 +79,12 @@
 <script>
 import { config } from '@/assets/config'
 import LoginDialog from '@/components/logindialog/loginDialog'
+import Reply from './components/reply'
 export default {
   name: 'Article',
   components: {
-    LoginDialog
+    LoginDialog,
+    Reply
   },
   data () {
     return {
@@ -84,6 +94,11 @@ export default {
       content: '',
       comments: {},
       errorText: '',
+      replyItem: {
+        shown: -1,
+        commentId: -1, // reply 存储父comment的id comment忽略此项,
+        item: null // 保存要回复的目标的记录 props到reply module中
+      },
       loginProps: { isShown: false }
     }
   },
@@ -96,6 +111,9 @@ export default {
       this.$axios.get('/api/article/' + this.id + '/comment')
         .then(res => { this.comments = res.data })
     },
+    /**
+     * 点击评论发布和textare focus时检测用户是否登录
+     */
     comentOpsClick (status) {
       if (status === 'cancel') { return (this.comment = '') }
       if (status === 'focus' && !localStorage.getItem('token')) {
@@ -115,6 +133,39 @@ export default {
     getLoginEmit (recv) {
       console.log('emit recv:', recv)
       this.loginProps.isShown = false
+    },
+    /**
+     * 显示评论回复和回复回复框
+     */
+    replyContent (item) {
+      if (!localStorage.getItem('token')) {
+        this.loginProps.isShown = true
+      }
+      if (Number.parseInt(localStorage.getItem('scope')) !== 2) {
+        window.localStorage.removeItem('token')
+        window.localStorage.removeItem('scope')
+        this.loginProps.isShown = true
+      }
+      this.replyItem.shown = item.id
+      this.replyItem.item = item
+      if (item.userd) {
+        this.replyItem.commentId = item.comment_id
+      } else {
+        this.replyItem.commentId = -1
+      }
+    },
+    /**
+     * 处理评论回复和回复回复结果
+     */
+    replyStatusChange (status) {
+      if (status.status === 'failure') {
+        this.errorText = status.message
+        return
+      }
+      this.replyItem.shown = -1
+      this.replyItem.commentId = -1
+      this.replyItem.item = null
+      if (status.status === 'confirm') { this.getComments() }
     }
   },
   mounted () {
