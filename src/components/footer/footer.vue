@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
     <mu-appbar class="footer-content" color="darkBlack">
-      <p>Developed by SEVEN ©SEVENZLS 2017-2018 滇ICP备17010711号-1</p>
+      <p>Developed by SEVEN ©SEVENZLS 2017-2020 滇ICP备17010711号-1</p>
     </mu-appbar>
   </div>
 </template>
