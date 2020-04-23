@@ -40,6 +40,11 @@ export default new Router({
       redirect: '/admin/article',
       children: [
         {
+          path: '',
+          name: 'AdminIndex',
+          component: () => import('@/pages/admins/home/index')
+        },
+        {
           path: 'article',
           name: 'AdminArticle',
           component: () => import('@/pages/admins/article/article')

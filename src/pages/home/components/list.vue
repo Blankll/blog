@@ -60,6 +60,7 @@ export default {
   max-width 1900px
   width 90%
   height 100%
+  border none
   @media (max-width 1000px) {
     width 100%
   }

@@ -18,6 +18,21 @@
         <mu-button color="purple" @click="zan">
           <mu-icon value="thumb_up" left></mu-icon>{{article.zan}}
         </mu-button>
+        <div class="share">
+          <div class="fl">分享到：</div>
+            <div @click="shareTo('qzone')">
+                <img src="http://zixuephp.net/static/images/qqzoneshare.png" width="30">
+            </div>
+            <div @click="shareTo('qq')">
+                <img src="http://zixuephp.net/static/images/qqshare.png" width="32">
+            </div>
+            <div @click="shareTo('sina')">
+                <img src="http://zixuephp.net/static/images/sinaweiboshare.png" width="36">
+            </div>
+            <div @click="shareTo('wechat')">
+                <img src="http://zixuephp.net/static/images/wechatshare.png" width="32">
+            </div>
+        </div>
       </div>
     </div>
     <div class="comment-box">
@@ -192,6 +207,25 @@ export default {
           if (res.data.status === 1) { this.article.zan += 1 }
         })
         .catch(err => { console.log(err) })
+    },
+    // 点击分享
+    shareTo (type) {
+      let logo = this.prefix + this.article.imgurl
+      let title = this.article.title
+      let desc = this.article.content.substring(0, 200)
+      let href = window.location.href
+      switch (type) {
+        case 'qzone':
+          window.open(`https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=${href}?sharesource=qzone&title=${title}&pics=${logo}&summary=${desc}`)
+          break
+        case 'qq':
+          window.open(`https://connect.qq.com/widget/shareqq/index.html?url=${href}?sharesource=qzone&title=${title}&pics=${logo}&summary=${desc}&desc=${desc}`)
+          break
+        case 'sina':
+          break
+        case 'wechat':
+          break
+      }
     }
   },
   mounted () {
@@ -242,6 +276,15 @@ export default {
     margin 0px auto
     display flex
     justify-content space-around
+    .share
+      display flex
+      div
+        margin-left 10px
+      div:hover
+        cursor pointer
+      div:nth-child(1)
+        line-height 32px
+        cursor auto
   .create-date
     text-align center
 .comment-box
