@@ -5,19 +5,14 @@
   </mu-button>
   <!-- <div>title</div> -->
   <profile v-if="isLogin" slot="right"></profile>
-      <login-button v-if="!isLogin" slot="right"></login-button>
 </mu-appbar>
 </template>
 <script>
 import Token from '@/utils/token'
 import Profile from '@/components/header/components/profile'
-import LoginButton from '@/components/header/components/login'
 export default {
   name: 'AdminHomeTop',
-  components: {
-    Profile,
-    LoginButton
-  },
+  components: { Profile },
   data () {
     return {
       isLogin: false,

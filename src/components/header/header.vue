@@ -10,29 +10,43 @@
         <div @click="go('me')">ME</div>
       </div>
       <profile v-if="isLogin" slot="right"></profile>
-      <login-button v-if="!isLogin" slot="right"></login-button>
+      <div v-else @click="login" class="login" slot="right">LOGIN</div>
+      <!-- <login-button v-if="!isLogin" ></login-button> -->
     </mu-appbar>
+    <login-dialog
+      v-if="loginProps.isShown"
+      :login-props= "loginProps"
+      @loginEmit="getLoginEmit">
+      </login-dialog>
   </div>
 </template>
 
 <script>
 import Token from '@/utils/token'
 import Profile from '@/components/header/components/profile'
-import LoginButton from '@/components/header/components/login'
+import LoginDialog from '@/components/logindialog/loginDialog'
 export default {
   name: 'Header',
-  data () {
-    return {
-      isLogin: false
-    }
-  },
   components: {
     Profile,
-    LoginButton
+    LoginDialog
+  },
+  data () {
+    return {
+      isLogin: false,
+      loginProps: { isShown: false }
+    }
   },
   methods: {
     go (url = '') {
       this.$router.push({ path: '/' + url })
+    },
+    getLoginEmit (recv) {
+      console.log('emit recv:', recv)
+      this.loginProps.isShown = false
+    },
+    login () {
+      this.loginProps.isShown = true
     }
   },
   mounted () {
@@ -52,4 +66,8 @@ export default {
     div
       margin-right 20px
       cursor pointer
+  .login
+    margin-right 15px
+    cursor pointer
+    font-size 17p
 </style>
