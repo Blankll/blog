@@ -115,7 +115,7 @@ export default {
   data () {
     return {
       prefix: config.prefix,
-      id: this.$route.query.id,
+      id: this.$route.params.id,
       article: {},
       content: '',
       comments: {},
@@ -212,7 +212,7 @@ export default {
     shareTo (type) {
       let logo = this.prefix + this.article.imgurl
       let title = this.article.title
-      let desc = this.article.content.substring(0, 200)
+      let desc = this.article.content.replace(/<[^>]+>/g, '').substring(0, 200)
       let href = window.location.href
       switch (type) {
         case 'qzone':

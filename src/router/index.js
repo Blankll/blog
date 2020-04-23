@@ -17,7 +17,7 @@ export default new Router({
           component: () => import('@/pages/home/home')
         },
         {
-          path: 'article',
+          path: 'article/:id',
           name: 'Article',
           component: () => import('@/pages/article/article')
         },

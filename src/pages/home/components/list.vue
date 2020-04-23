@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     checkOut (item) {
-      this.$router.push({ path: '/article', query: { id: item.id } })
+      this.$router.push({ path: '/article/' + item.id })
     }
   },
   mounted () { }
