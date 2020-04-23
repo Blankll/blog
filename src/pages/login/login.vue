@@ -31,7 +31,7 @@ export default {
           let scope = res.data.scope
           Token.setToken(token, scope)
           if (scope === 1) {
-            this.$router.push('/admin/article')
+            this.$router.push('/admin')
           } else {
             this.$router.push('/')
           }

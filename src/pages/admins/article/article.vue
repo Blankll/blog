@@ -36,12 +36,12 @@ export default {
     return {
       articles: [],
       columns: [
-        { title: 'ID', width: 50, name: 'name' },
+        { title: 'ID', width: 100, name: 'name' },
         { title: 'TITLE', name: 'calories', width: 290, align: 'center', sortable: true },
         { title: 'CREATE', name: 'fat', width: 120, align: 'center', sortable: true },
         { title: 'PUDATE', name: 'carbs', width: 120, align: 'center', sortable: true },
         { title: 'STATUS', name: 'protein', width: 90, align: 'center', sortable: true },
-        { title: 'OPS', name: 'protein', width: 360, align: 'center', sortable: true }
+        { title: 'OPS', name: 'protein', width: 400, align: 'center', sortable: true }
       ]
     }
   },
