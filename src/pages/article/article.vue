@@ -21,16 +21,16 @@
         <div class="share">
           <div class="fl">分享到：</div>
             <div @click="shareTo('qzone')">
-                <img src="http://zixuephp.net/static/images/qqzoneshare.png" width="30">
+                <img src="https://zixuephp.net/static/images/qqzoneshare.png" width="30">
             </div>
             <div @click="shareTo('qq')">
-                <img src="http://zixuephp.net/static/images/qqshare.png" width="32">
+                <img src="https://zixuephp.net/static/images/qqshare.png" width="32">
             </div>
             <div @click="shareTo('sina')">
-                <img src="http://zixuephp.net/static/images/sinaweiboshare.png" width="36">
+                <img src="https://zixuephp.net/static/images/sinaweiboshare.png" width="36">
             </div>
             <div @click="shareTo('wechat')">
-                <img src="http://zixuephp.net/static/images/wechatshare.png" width="32">
+                <img src="https://zixuephp.net/static/images/wechatshare.png" width="32">
             </div>
         </div>
       </div>
