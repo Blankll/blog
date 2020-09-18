@@ -1,18 +1,20 @@
 <template>
   <div class="home">
-    <mu-appbar color="darkBlack">
-      <mu-button icon slot="left">
-        <mu-icon value="menu" @click="go()"></mu-icon>
-      </mu-button>
-      <div class="menu-item">
-        <div @click="go()">SEVEN</div>
-        <div @click="go('tags')">TAGS</div>
-        <div @click="go('me')">ME</div>
-      </div>
-      <profile v-if="isLogin" slot="right"></profile>
-      <div v-else @click="login" class="login" slot="right">LOGIN</div>
-      <!-- <login-button v-if="!isLogin" ></login-button> -->
-    </mu-appbar>
+    <b-navbar type="dark" variant="dark" fixed="top">
+      <b-navbar-brand href="#" @click="go()">SEVEN</b-navbar-brand>
+      <b-collapse id="nav-text-collapse" is-nav>
+      <b-navbar-nav>
+        <b-nav-item @click="go('tags')">TAGS</b-nav-item>
+        <b-nav-item @click="go('me')">ME</b-nav-item>
+      </b-navbar-nav>
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item right>
+          <profile v-if="isLogin" slot="right"></profile>
+          <div v-else @click="login" class="login" slot="right">LOGIN</div>
+        </b-nav-item>>
+      </b-navbar-nav>
+    </b-collapse>
+    </b-navbar>
     <login-dialog
       v-if="loginProps.isShown"
       :login-props= "loginProps"
@@ -57,17 +59,4 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-.home
-  width 100%
-  position fixed
-  z-index 9999
-  .menu-item
-    display flex
-    div
-      margin-right 20px
-      cursor pointer
-  .login
-    margin-right 15px
-    cursor pointer
-    font-size 17p
 </style>
